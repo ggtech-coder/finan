@@ -1,14 +1,15 @@
 {
   "name": "FinançasCasal",
   "short_name": "FinançasCasal",
-  "description": "Gestão Financeira do Casal",
-  "start_url": "/",
+  "description": "Gestão Financeira do Casal — controle inteligente",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0f0f1a",
   "theme_color": "#7C3AED",
   "orientation": "portrait-primary",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
