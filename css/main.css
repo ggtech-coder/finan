@@ -1215,3 +1215,11 @@ textarea.form-control { resize: vertical; min-height: 72px; }
   .insights-kpi-row { grid-template-columns:1fr; }
   .goals-grid, .patrimony-grid { grid-template-columns:1fr; }
 }
+
+/* Calendar income events */
+.cal-event-income { background:rgba(16,185,129,.2); color:#10b981; }
+
+/* Emergency KPI clickable */
+.kpi-emergency { cursor:pointer; transition:.2s; }
+.kpi-emergency:hover { filter:brightness(1.1); transform:translateY(-1px); }
+.kpi-emergency::after { content:'+ valor'; display:block; font-size:10px; color:#7C3AED; font-weight:700; margin-top:4px; opacity:.7; }
