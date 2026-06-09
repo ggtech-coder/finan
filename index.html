@@ -4,10 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#7C3AED" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FinançasCasal" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="description" content="Gestão Financeira do Casal — controle inteligente das finanças" />
   <title>FinançasCasal</title>
 
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="./manifest.json" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <link rel="icon" type="image/png" href="icons/icon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,7 +66,7 @@
   </nav>
 
   <div class="sidebar-footer">
-    <button class="btn-icon" id="btnExportBackup" title="Exportar Backup">⬇️</button>
+    <button class="btn-icon" id="btnExportBackup" title="Baixar Relatório PDF">📄</button>
     <button class="btn-icon" id="btnImportBackup" title="Importar Backup">⬆️</button>
     <input type="file" id="importFileInput" accept=".json" style="display:none" />
   </div>
@@ -148,7 +152,7 @@
           <div class="kpi-value" id="kpiOverdue">0</div>
         </div>
       </div>
-      <div class="kpi-card kpi-emergency">
+      <div class="kpi-card kpi-emergency" onclick="App.Patrimony.openModal()" title="Clique para adicionar à reserva">
         <div class="kpi-icon">🛡️</div>
         <div class="kpi-info">
           <div class="kpi-label">Reserva de Emergência</div>
@@ -360,7 +364,7 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+      navigator.serviceWorker.register('./service-worker.js', { scope: './' }).catch(() => {});
     });
   }
 </script>
