@@ -1225,61 +1225,46 @@ textarea.form-control { resize: vertical; min-height: 72px; }
 .kpi-emergency::after { content:'+ valor'; display:block; font-size:10px; color:#7C3AED; font-weight:700; margin-top:4px; opacity:.7; }
 
 /* ============================================================
-   SIDEBAR COLLAPSE — desktop only
+   SIDEBAR COLLAPSE — DESKTOP ONLY (min-width: 769px)
+   No mobile: sidebar is controlled by hamburger + transform
    ============================================================ */
+@media (min-width: 769px) {
 
-/* Botão de toggle: fica colado na borda direita da sidebar */
-.sidebar-collapse-btn {
-  position: absolute;
-  right: -13px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #7C3AED;
-  color: #fff;
-  border: 2px solid rgba(255,255,255,.25);
-  font-size: 13px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 101;
-  box-shadow: 0 2px 8px rgba(0,0,0,.35);
-  transition: background .2s, transform .2s;
-  flex-shrink: 0;
-}
-.sidebar-collapse-btn:hover { background: #6D28D9; }
+  /* Transições suaves só no desktop */
+  .sidebar       { transition: width .25s cubic-bezier(.4,0,.2,1); overflow: visible; }
+  .main-content  { transition: margin-left .25s cubic-bezier(.4,0,.2,1); }
 
-/* Sidebar: transição suave de largura */
-.sidebar {
-  transition: width .25s cubic-bezier(.4,0,.2,1);
-  overflow: visible !important; /* garante que o botão não seja cortado */
-}
-.main-content {
-  transition: margin-left .25s cubic-bezier(.4,0,.2,1);
-}
+  /* Botão ‹ / › flutuante na borda direita da sidebar */
+  .sidebar-collapse-btn {
+    position: absolute;
+    right: -13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #7C3AED;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,.25);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 101;
+    box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .sidebar-collapse-btn:hover { background: #6D28D9; }
 
-/* Estado recolhido */
-.sidebar.collapsed { width: 64px; }
-.sidebar.collapsed .logo-text  { display: none; }
-.sidebar.collapsed .nav-label  { display: none; }
-.sidebar.collapsed .sidebar-footer { justify-content: center; flex-wrap: wrap; }
-.sidebar.collapsed .sidebar-logo  { justify-content: center; padding: 20px 0; }
-.sidebar.collapsed .nav-item      { justify-content: center; padding: 10px 0; }
-.sidebar.collapsed + .main-content { margin-left: 64px; }
-
-/* ============================================================
-   MOBILE: esconde o botão de collapse — o hamburger já cuida
-   ============================================================ */
-@media (max-width: 768px) {
-  .sidebar-collapse-btn { display: none !important; }
-
-  /* Garante que o collapse do desktop não vaze pro mobile */
-  .sidebar.collapsed { width: var(--sidebar-w) !important; }
-  .sidebar.collapsed + .main-content { margin-left: 0 !important; }
-
-  /* Remove inline margin que o JS eventualmente seta */
-  .main-content { margin-left: 0 !important; }
+  /* Estado recolhido */
+  .sidebar.collapsed                  { width: 64px; }
+  .sidebar.collapsed .logo-text       { display: none; }
+  .sidebar.collapsed .nav-label       { display: none; }
+  .sidebar.collapsed .sidebar-logo    { justify-content: center; padding: 20px 0; }
+  .sidebar.collapsed .sidebar-nav     { padding: 12px 4px; }
+  .sidebar.collapsed .nav-item        { justify-content: center; padding: 10px 0; }
+  .sidebar.collapsed .sidebar-footer  { justify-content: center; flex-wrap: wrap; gap: 6px; }
+  .sidebar.collapsed + .main-content  { margin-left: 64px; }
 }
