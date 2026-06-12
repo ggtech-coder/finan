@@ -1223,3 +1223,75 @@ textarea.form-control { resize: vertical; min-height: 72px; }
 .kpi-emergency { cursor:pointer; transition:.2s; }
 .kpi-emergency:hover { filter:brightness(1.1); transform:translateY(-1px); }
 .kpi-emergency::after { content:'+ valor'; display:block; font-size:10px; color:#7C3AED; font-weight:700; margin-top:4px; opacity:.7; }
+
+/* ============================================================
+   SIDEBAR COLLAPSE (Desktop)
+   ============================================================ */
+
+/* Botão de recolher fixo no canto da sidebar */
+.sidebar-collapse-btn {
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #7C3AED;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,.3);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+  transition: background .2s, transform .2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+.sidebar-collapse-btn:hover { background: #6D28D9; }
+
+/* Estado recolhido */
+.sidebar.collapsed {
+  width: 64px;
+}
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .nav-label,
+.sidebar.collapsed .sidebar-footer .btn-icon ~ .btn-icon,
+.sidebar.collapsed .sidebar-footer {
+  display: none;
+}
+.sidebar.collapsed .sidebar-logo {
+  justify-content: center;
+  padding: 24px 0 20px;
+}
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 10px 0;
+}
+.sidebar.collapsed .nav-item::before {
+  right: 0;
+}
+.sidebar.collapsed .sidebar-collapse-btn {
+  right: -14px;
+  /* Rotaciona a seta para apontar para direita quando recolhido */
+}
+.sidebar.collapsed + .main-content {
+  margin-left: 64px;
+}
+
+/* Transição suave */
+.sidebar {
+  transition: width .25s cubic-bezier(.4,0,.2,1);
+}
+.main-content {
+  transition: margin-left .25s cubic-bezier(.4,0,.2,1);
+}
+
+/* Esconde o botão collapse no mobile (já tem hamburger) */
+@media (max-width: 768px) {
+  .sidebar-collapse-btn { display: none; }
+  .sidebar.collapsed { width: var(--sidebar-w); }
+  .sidebar.collapsed + .main-content { margin-left: 0; }
+}
