@@ -1225,16 +1225,36 @@ textarea.form-control { resize: vertical; min-height: 72px; }
 .kpi-emergency::after { content:'+ valor'; display:block; font-size:10px; color:#7C3AED; font-weight:700; margin-top:4px; opacity:.7; }
 
 /* ============================================================
-   SIDEBAR COLLAPSE — DESKTOP ONLY (min-width: 769px)
-   No mobile: sidebar is controlled by hamburger + transform
+   SIDEBAR COLLAPSE BUTTON
+   Mobile:  fecha a sidebar (age como botão "×")
+   Desktop: colapsa/expande a sidebar
    ============================================================ */
-@media (min-width: 769px) {
 
-  /* Transições suaves só no desktop */
+/* BASE — aparece em todos os tamanhos */
+.sidebar-collapse-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,.35);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 4px auto 12px;
+  transition: background .2s;
+}
+.sidebar-collapse-btn:hover,
+.sidebar-collapse-btn:active { background: rgba(255,255,255,.4); }
+
+/* DESKTOP — bolinha flutuante na borda direita, meio da sidebar */
+@media (min-width: 769px) {
   .sidebar       { transition: width .25s cubic-bezier(.4,0,.2,1); overflow: visible; }
   .main-content  { transition: margin-left .25s cubic-bezier(.4,0,.2,1); }
 
-  /* Botão ‹ / › flutuante na borda direita da sidebar */
   .sidebar-collapse-btn {
     position: absolute;
     right: -13px;
@@ -1242,19 +1262,12 @@ textarea.form-control { resize: vertical; min-height: 72px; }
     transform: translateY(-50%);
     width: 26px;
     height: 26px;
-    border-radius: 50%;
     background: #7C3AED;
-    color: #fff;
     border: 2px solid rgba(255,255,255,.25);
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 101;
     box-shadow: 0 2px 8px rgba(0,0,0,.35);
-    flex-shrink: 0;
-    line-height: 1;
+    margin: 0;
+    font-size: 13px;
+    z-index: 101;
   }
   .sidebar-collapse-btn:hover { background: #6D28D9; }
 
@@ -1268,3 +1281,13 @@ textarea.form-control { resize: vertical; min-height: 72px; }
   .sidebar.collapsed .sidebar-footer  { justify-content: center; flex-wrap: wrap; gap: 6px; }
   .sidebar.collapsed + .main-content  { margin-left: 64px; }
 }
+
+/* OVERLAY — fundo escuro quando sidebar aberta no mobile */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 199;
+}
+.sidebar-overlay.active { display: block; }
