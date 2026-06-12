@@ -1,11 +1,25 @@
-const CACHE = 'financas-v2';
+const CACHE = 'financas-v3';
+const BASE = '/finan';
 const ASSETS = [
-  './', './index.html', './css/main.css',
-  './js/config.js', './js/db.js', './js/utils.js', './js/ui.js',
-  './js/transactions.js', './js/goals.js', './js/patrimony.js',
-  './js/reports.js', './js/dashboard.js', './js/calendar.js',
-  './js/insights.js', './js/backup.js', './js/app.js',
-  './manifest.json', './icons/icon-192.png', './icons/icon-512.png'
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/css/main.css',
+  BASE + '/js/config.js',
+  BASE + '/js/db.js',
+  BASE + '/js/utils.js',
+  BASE + '/js/ui.js',
+  BASE + '/js/transactions.js',
+  BASE + '/js/goals.js',
+  BASE + '/js/patrimony.js',
+  BASE + '/js/reports.js',
+  BASE + '/js/dashboard.js',
+  BASE + '/js/calendar.js',
+  BASE + '/js/insights.js',
+  BASE + '/js/backup.js',
+  BASE + '/js/app.js',
+  BASE + '/manifest.json',
+  BASE + '/icons/icon-192.png',
+  BASE + '/icons/icon-512.png'
 ];
 
 self.addEventListener('install', e => {
@@ -29,25 +43,29 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
 
-  // For navigation requests, serve index.html (fixes 404 on mobile PWA)
+  // Para navegações (abertura do PWA, refresh), serve sempre o index.html
   if (e.request.mode === 'navigate') {
     e.respondWith(
-      caches.match('./index.html').then(r => r || fetch('./index.html'))
+      caches.match(BASE + '/index.html').then(r => r || fetch(BASE + '/index.html'))
     );
     return;
   }
 
-  // Network-first for Firebase/CDN resources
+  // Network-first para Firebase/CDN/fontes externas
   const url = new URL(e.request.url);
-  if (url.hostname.includes('firebase') || url.hostname.includes('googleapis') ||
-      url.hostname.includes('cdn.jsdelivr') || url.hostname.includes('fonts.')) {
+  if (
+    url.hostname.includes('firebase') ||
+    url.hostname.includes('googleapis') ||
+    url.hostname.includes('cdn.jsdelivr') ||
+    url.hostname.includes('fonts.')
+  ) {
     e.respondWith(
       fetch(e.request).catch(() => caches.match(e.request))
     );
     return;
   }
 
-  // Cache-first for local assets
+  // Cache-first para assets locais
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
@@ -57,7 +75,7 @@ self.addEventListener('fetch', e => {
           caches.open(CACHE).then(c => c.put(e.request, rc));
         }
         return response;
-      }).catch(() => caches.match('./index.html'));
+      }).catch(() => caches.match(BASE + '/index.html'));
     })
   );
 });
